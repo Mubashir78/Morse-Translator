@@ -1,7 +1,6 @@
-from utils.utils import decrypt_text, encrypt_text, save_to_file
+from utils.utils import decrypt_text, encrypt_text, save_audio, save_to_file
 from pydub import AudioSegment
 import os
-
 
 print("-" * 50)
 print("Morse Code Translator")
@@ -30,7 +29,9 @@ while True:
             dot = AudioSegment.from_wav("./utils/sounds/dot.wav")
             dash = AudioSegment.from_wav("./utils//sounds/dash.wav")
             silence = AudioSegment.from_wav("./utils/sounds/silent.wav")
-            starting_audio = AudioSegment.from_wav("./utils/sounds/starting_audio.wav")
+            starting_audio = AudioSegment.from_wav("./utils/sounds/starting_audio.wav") 
+
+            """Loop over the morse code and concatenate audios matching the elements of the morse code."""
 
             for i in encrypted:
                 if i == ".":
@@ -40,26 +41,28 @@ while True:
                 elif i == " " or "/":
                     starting_audio += silence
             
-            folder = os.listdir("exported_sounds")
-            if folder == []:
-                file = folder
-            else:
-                file = int(folder[-1][13])
+            try:
+                folder = "exported_sounds"
+                audio = save_audio(folder, starting_audio)
+                print(f"Audio file saved as: {audio.name[18:]}")
+            except FileNotFoundError:
+                os.mkdir("exported_sounds")
+                folder = "exported_sounds"
+                audio = save_audio(folder, starting_audio)
+                print(f"Audio file saved as: {audio.name[18:]}")
 
-            if folder == []:
-                starting_audio.export(f"exported_sounds/exportedsound0.wav", format="wav")
-            else:
-                starting_audio.export(f"exported_sounds/exportedsound{file + 1}.wav", format="wav")
-            
+        elif save == "n":
+            pass
 
         else:
-            pass
+            print("Not a valid answer")
 
         choice = input("Translate another one? [Y/N]: \n" + "-" * 50 + "\n").lower()
 
         if choice == "y":
             pass
         else:
+            print("Thank you for using my translator!")
             break
 
     elif _type.lower() == "2":
@@ -77,6 +80,7 @@ while True:
         if choice == "y":
             pass
         else:
+            print("Thank you for using my translator!")
             break
 
     else:

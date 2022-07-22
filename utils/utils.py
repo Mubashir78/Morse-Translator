@@ -66,4 +66,11 @@ def save_to_file(texts, morse=False):
     else:
         with open("logs.txt", "a") as f:
             f.write(f"Type: Text-To-Morse at {formatted_date}\nValue: {texts}\n" + "-" * 50 + "\n")
-            
+
+
+def save_audio(folder, audio_file):
+    date = datetime.datetime.now()
+    formatted_date = date.strftime("%Y_%d_%H_%M_%S")
+    file = audio_file.export(f"./{folder}/exported_morse{formatted_date}.wav")
+    
+    return file
