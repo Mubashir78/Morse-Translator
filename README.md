@@ -1,6 +1,6 @@
 # Morse-Translator
 
-Encode or Decode Morse Code and save into a txt file.
+Encode or Decode Morse Code and save into a txt file or an audio file.
 
 <br/>
 
