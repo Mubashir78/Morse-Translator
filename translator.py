@@ -1,4 +1,4 @@
-from utils.utils import decrypt_text, encrypt_text
+from utils.utils import decrypt_text, encrypt_text, save_to_file
 
 
 print("-" * 50)
@@ -15,29 +15,35 @@ while True:
        
         text = input("Input Text: ")
 
-        print("-" * 50 + "\nTranslated text: " + encrypt_text(text) + "\n"+ "-" * 50)
+        encrypted = encrypt_text(text)
 
-        choice = input("Translate another one? [Y/N]\n").lower()
+        print("-" * 50 + "\nTranslated text: " + encrypted + "\n"+ "-" * 50)
+        save_to_file(encrypted)
+        print("Saved into logs.txt")
 
-        match choice:
-            case "y" | "yes":
-                pass
-            case _:
-                break
+        choice = input("Translate another one? [Y/N]\n" + "-" * 50 + "\n").lower()
+
+        if choice == "y":
+            pass
+        else:
+            break
 
     elif _type.lower() == "d":
         
         text = input("Input Morse Code: ")
 
-        print("-" * 50 + "\nDecoded Morse Code: " + decrypt_text(text) + "\n" + "-" * 50)
+        decrypted = decrypt_text(text)
 
-        choice = input("Translate another one? [Y/N]\n").lower()
+        print("-" * 50 + "\nDecoded Morse Code: " + decrypted + "\n" + "-" * 50)
+        save_to_file(decrypted)
+        print("Saved into logs.txt")
+
+        choice = input("Translate another one? [Y/N]\n" + "-" * 50 + "\n").lower()
         
-        match choice:
-            case "y":
-                pass
-            case "n":
-                break
+        if choice == "y":
+            pass
+        else:
+            break
 
     else:
         print("Not a valid answer.")

@@ -1,4 +1,9 @@
 import json
+import datetime
+
+date = datetime.datetime.now()
+
+formatted_date = date.strftime("%b %d, %Y - %H:%M:%S")
 
 def encrypt_text(texts):
     """Encrypt Text
@@ -51,3 +56,12 @@ def decrypt_text(codes):
             msg += "#"
     
     return msg
+
+
+def save_to_file(texts, morse=False):
+    if morse:
+        with open("logs.txt", "a") as f:
+            f.write(f"Type: Morse-To-Text at {formatted_date}\nValue: {texts}\n" + "-" * 50)
+    else:
+        with open("logs.txt", "a") as f:
+            f.write(f"Type: Text-To-Morse at {formatted_date}\nValue: {texts}\n" + "-" * 50)
